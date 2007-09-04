@@ -1,0 +1,10 @@
+
+Revision history for Perl extension POD2::Base.
+
+0.03    Tue Sep  4 2007
+        - rewrote "lib/POD2/Base.pod"
+
+0.02    Mon Sep  3 2007
+        - first version (after POD2::IT 0.11)
+        - request for comments at pod2it-translators
+          and roma-pm mailing lists
