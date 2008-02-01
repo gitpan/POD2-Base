@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 use vars qw($VERSION);
-$VERSION = '0.03';
+$VERSION = '0.0301';
 
 sub new {
     my $proto = shift;
@@ -91,5 +91,3 @@ sub print_pod {
 }
 
 1;
-
-

@@ -4,11 +4,16 @@ use ExtUtils::MakeMaker;
 
 my $EUMM_VERSION = eval $ExtUtils::MakeMaker::VERSION;
 
+# note. EUMM 6.39 always includes 'author' in META.yml
+# fixing compliance with spec
+
 WriteMakefile(
     NAME              => 'POD2::Base',
     VERSION_FROM      => 'lib/POD2/Base.pm',
     PREREQ_PM         => {
         strict            => 0,
+        warnings          => 0,
+        vars              => 0,
       ( warnings::compat  => 0, ) x!! ( $] < 5.006 ),
 
         Test::More        => 0,

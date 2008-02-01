@@ -1,6 +1,10 @@
 
 Revision history for Perl extension POD2::Base.
 
+0.0301  Fri Feb  1 2008
+        - warning and vars in PREREQ_PM
+        - minor POD tweaks
+
 0.03    Tue Sep  4 2007
         - rewrote "lib/POD2/Base.pod"
 

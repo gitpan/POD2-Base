@@ -106,21 +106,21 @@ Used by C<Pod::Perldoc> to find out where to
 look for translated pods. 
 
 The C<POD2::Base> default behavior is to find
-out the path of F<POD2/E<lt>langE<gt>/> directory
+out the path of F<< POD2/<lang>/ >> directory
 in the current Perl installation.
 
 =item B<search_perlfunc_re>
 
     $re = $pod2->search_perlfunc_re; 
 
-To implement C<perldoc -f E<lt>functionE<gt>>,
+To implement C<< perldoc -f <function> >>
 the current code of C<Pod::Perldoc> uses a hard coded string
 "Alphabetical Listing of Perl Functions" or the return
 of this method (in a regexp) to skip the introduction
 and reach the listing of core functions.
 Thus a translation package with a corresponding translated
 F<perlfunc.pod> should define this method to 
-make C<perldoc -L E<lt>langE<gt> -f E<lt>functionE<gt>>
+make C<< perldoc -L <lang> -f <function> >>
 work properly.
 
 =back
