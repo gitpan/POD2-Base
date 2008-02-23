@@ -1,12 +1,13 @@
 --- #YAML:1.0
 name:                POD2-Base
-version:             0.0301
+version:             0.04
 abstract:            Base module for translations of Perl documentation
 license:             perl
 author:              ~
 generated_by:        ExtUtils::MakeMaker version 6.42
 distribution_type:   module
 requires:     
+    File::Spec:                    0
     strict:                        0
     Test::More:                    0
     vars:                          0
@@ -17,3 +18,4 @@ meta-spec:
 recommends:
     Test::Pod:                     1.18
     Test::Pod::Coverage:           1.04
+    ExtUtils::MakeMaker:           6.38

@@ -30,8 +30,8 @@ DESCRIPTION
         $ perldoc -L FR -f <function>
         $ perldoc -L TH -q <FAQregex>
 
-    (*Note*: we hope this support ships together with the soon-to-be 5.10
-    release of the Perl interpreter.)
+    (*Note*: this support was shipped together with the recently released
+    5.10.0 version the Perl interpreter.)
 
     The objective of this class is to provide a minimum base to help
     `perldoc' and authors of translation packages to do their job.
@@ -76,25 +76,58 @@ METHODS
 
             $pod2 = POD2::Base->new({ lang => 'tlh' });
 
-        where (by now) "lang" is the only argument that matters.
+        where the supported options are:
+
+        * "lang"
+            Specifies the language code we're interested in. This is
+            required, but can be extracted from the name of a subclass. Read
+            below.
+
+        * "inc"
+            This is used to override the list of Perl library directories
+            where POD documents are searched (namely, `@INC'). Most of the
+            time, you don't want to mess with that. It's handy for debugging
+            and testing.
+
+            It must be an array ref.
 
         If `POD2::ANY' is a subclass of `POD2::Base', the inherited
         constructor will work without arguments pulling 'ANY' from the
         package name and using it as the intented language code.
 
+        Note that use of "inc" in the constructor freezes the list of
+        library dirs searched by the `POD2::Base' instance. If this is not
+        used, the up-to-date `@INC' is used at each call of `pod_dirs' (so
+        that dynamic changes in the Perl library path are taken into
+        account). That's what we meant with the "Most of the time, you don't
+        want to mess with that" mentioned above.
+
     pod_dirs
             @dirs = $pod2->pod_dirs;
+            @dirs = $pod2->pod_dirs(\%options);
 
         Used by `Pod::Perldoc' to find out where to look for translated
         pods.
 
-        The `POD2::Base' default behavior is to find out the path of
-        POD2/<lang>/ directory in the current Perl installation.
+        The `POD2::Base' default behavior is to find POD2/<lang>/
+        directories under the current Perl library directories (`@INC') or
+        the list given as argument "inc" in the constructor.
+
+        The supported options are:
+
+        * "test"
+            By default, the return of `pod_dirs' do not include POD
+            directories which do not exist (tested with `-d'). If an
+            explicit false value for this option (like `test => 0') is
+            given, such test is not done and `pod_dirs' includes all
+            possible candidates POD2/<lang>/ under the library directories.
+            (Handy for debugging this module. Not much practical use for
+            anything else.)
 
     search_perlfunc_re
             $re = $pod2->search_perlfunc_re; 
 
-        To implement `perldoc -f <function>', the current code of
+        To implement `perldoc -f <function>' the current code of
         `Pod::Perldoc' uses a hard coded string "Alphabetical Listing of
         Perl Functions" or the return of this method (in a regexp) to skip
         the introduction and reach the listing of core functions. Thus a
@@ -130,7 +163,9 @@ METHODS
         Prints the corresponding Perl version of the original files
         corresponding to the pods passed as arguments.
 
-EXAMPLE
+EXAMPLES
+  POD2::TLH
+
     A slightly extended version of `POD2::TLH' goes like this:
 
         package POD2::TLH; # Klingon
@@ -155,13 +190,34 @@ EXAMPLE
         $pod2->print_pods();
         $pod2->print_pod('pod_foo', 'pod_baz', ...); 
 
+  THE INSTALLED FILES
+
+    If you want to find out which language-specific POD files are installed
+    at your Perl, you could use a code similar to this.
+
+        use File::Find;
+        use POD2::Base;
+
+        my $pod2 = POD2::Base->new({ lang => $lang });
+
+        my @files;
+        find sub { push @files, $File::Find::name } if -f },
+             $pod2->pod_dirs;
+        print "$_\n" for @files;
+
+    In the `POD2-Base' distribution tarball, a script eg/list.pl is included
+    with an improved version of this code.
+
+    The rules of finding POD in .pod, .pm files and others belong to
+    Pod::Perldoc. So `POD2::Base' do not try to repeat them here.
+
 AUTHORS
     Enrico Sorcinelli <bepi at perl.it> (the original POD2::IT code)
 
     Adriano Ferreira <ferreira at cpan.org>
 
 SEE ALSO
-    POD2::FR, POD2::LT, perldoc, perl.
+    POD2::IT, POD2::FR, POD2::LT, POD2::CN, perldoc, perl.
 
 COPYRIGHT AND LICENCE
     Copyright (C) 2004-2006 Perl.it / Perl Mongers Italia

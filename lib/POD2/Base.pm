@@ -5,19 +5,22 @@ use 5.005;
 use strict;
 use warnings;
 
-use vars qw($VERSION);
-$VERSION = '0.0301';
+use vars qw( $VERSION );
+$VERSION = '0.04'; # XXX
+
+use File::Spec ();
 
 sub new {
     my $proto = shift;
     my $class = ref $proto || $proto;
     my $obj = bless {}, $class;
-    return $obj->_init(@_);
+    return $obj->_init( @_ );
 }
 
 # instance variables:
 #   lang - the preferred language of the POD documents
-#   base_dir - the base directory where these PODs live
+##   base_dir - the base directory where these PODs live
+#   inc - alternate library dirs (if given, replaces the ones in @INC)
 
 sub _init {
     my $self = shift;
@@ -28,7 +31,8 @@ sub _init {
     #croak "???" unless $args{lang};
     my $lang = uc $args{lang};
     $self->{lang} = $lang;
-    $self->{base_dir} = [ _base_dir($lang) ];
+#    $self->{base_dir} = [ _base_dir($lang) ];
+    $self->{inc} = $args{inc}; # XXX croak ?! must be array ref
 
     return $self;
 }
@@ -43,20 +47,32 @@ sub _extract_lang {
          ;
 }
 
-sub _base_dir {
-    my $lang = shift;
+#sub _base_dir {
+#    my $lang = shift;
+#
+#    my $dir = $INC{'POD2/Base.pm'};
+#    $dir =~ s/Base\.pm\z//;
+#    $dir .= $lang . '/';
+#    return $dir;
+#}
 
-    my $dir = $INC{'POD2/Base.pm'};
-    $dir =~ s/Base\.pm\z//;
-    $dir .= $lang . '/';
-    return $dir;
-
+sub _lib_dirs {
+    my $self = shift;
+    return $self->{inc} ? @{$self->{inc}} : @INC;
 }
 
 sub pod_dirs {
     my $self = shift;
-    return @{ $self->{base_dir} };
+    my %options = @_ ? %{$_[0]} : ();
+    $options{test} = 1 unless exists $options{test};
 
+    my $lang = $self->{lang};
+    my @candidates = map { File::Spec->catdir( $_, 'POD2', $lang ) } $self->_lib_dirs; # XXX the right thing to do
+    if ( $options{test} ) {
+        return grep { -d } @candidates;
+    }
+    return @candidates;
+    #return @{ $self->{base_dir} };
 }
 
 #sub search_perlfunc_re {

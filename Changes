@@ -1,6 +1,17 @@
 
 Revision history for Perl extension POD2::Base.
 
+0.04    Sat Feb 23 2008
+        - File::Spec is a prereq now
+        - one more constructor param: 'inc'
+        - pod_dirs now accept options ('test')
+        - pod_dirs now search all over @INC for
+          "POD2/<lang>/" dirs
+        - included an example for listing lang-specific
+          installed files (eg/list.pl)
+        - included a hoax of a Portuguese translation
+          for the documentation of this module
+
 0.0301  Fri Feb  1 2008
         - warning and vars in PREREQ_PM
         - minor POD tweaks

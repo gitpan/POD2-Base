@@ -36,14 +36,14 @@ to find translated PODs via:
     $ perldoc -L FR -f <function>
     $ perldoc -L TH -q <FAQregex>
 
-(I<Note>: we hope this support ships together with the
-soon-to-be 5.10 release of the Perl interpreter.)
+(I<Note>: this support was shipped together with the
+recently released 5.10.0 version the Perl interpreter.)
 
 The objective of this class is to provide a minimum
 base to help C<perldoc> and authors of translation
 packages to do their job.
 
-=head1 SUBCLASSING 
+=head1 SUBCLASSING
 
 If you want to write a translation package (and have
 some customization needs), your
@@ -91,23 +91,72 @@ The constructor. An actual call might look like this:
 
     $pod2 = POD2::Base->new({ lang => 'tlh' });
 
-where (by now) "lang" is the only argument that matters.
+where the supported options are:
+
+=over 4 
+
+=item * "lang"
+
+Specifies the language code we're interested in.
+This is required, but can be extracted from
+the name of a subclass. Read below.
+
+=item * "inc"
+
+This is used to override the list of Perl
+library directories where POD documents 
+are searched (namely, C<@INC>). Most of the
+time, you don't want to mess with that.
+It's handy for debugging and testing.
+
+It must be an array ref.
+
+=back
 
 If C<POD2::ANY> is a subclass of C<POD2::Base>, the
 inherited constructor will work without arguments
 pulling 'ANY' from the package name and using it
 as the intented language code.
 
+Note that use of "inc" in the constructor
+freezes the list of library dirs searched by the
+C<POD2::Base> instance. If this is not used,
+the up-to-date C<@INC> is used at each call
+of C<pod_dirs> (so that dynamic changes in
+the Perl library path are taken into account).
+That's what we meant with the
+"Most of the time, you don't want to mess with that" 
+mentioned above.
+
 =item B<pod_dirs>
 
     @dirs = $pod2->pod_dirs;
+    @dirs = $pod2->pod_dirs(\%options);
 
 Used by C<Pod::Perldoc> to find out where to
 look for translated pods. 
 
 The C<POD2::Base> default behavior is to find
-out the path of F<< POD2/<lang>/ >> directory
-in the current Perl installation.
+F<< POD2/<lang>/ >> directories under the
+current Perl library directories (C<@INC>) or
+the list given as argument "inc" in the constructor.
+
+The supported options are:
+
+=over 4
+
+=item * "test"
+
+By default, the return of C<pod_dirs> do not
+include POD directories which do not exist (tested
+with C<-d>). If an explicit false value for this option (like
+C<< test => 0 >>) is given, such test is not done
+and C<pod_dirs> includes all possible candidates
+F<< POD2/<lang>/ >> under the library directories.
+(Handy for debugging this module. Not much practical
+use for anything else.)
+
+=back
 
 =item B<search_perlfunc_re>
 
@@ -161,7 +210,9 @@ corresponding to the pods passed as arguments.
 
 =back
 
-=head1 EXAMPLE
+=head1 EXAMPLES
+
+=head2 POD2::TLH
 
 A slightly extended version of C<POD2::TLH> 
 goes like this:
@@ -188,6 +239,31 @@ And you may try:
     $pod2->print_pods();
     $pod2->print_pod('pod_foo', 'pod_baz', ...); 
 
+=head2 THE INSTALLED FILES
+
+If you want to find out which language-specific
+POD files are installed at your Perl,
+you could use a code similar to this.
+
+    use File::Find;
+    use POD2::Base;
+
+    my $pod2 = POD2::Base->new({ lang => $lang });
+
+    my @files;
+    find sub { push @files, $File::Find::name } if -f },
+         $pod2->pod_dirs;
+    print "$_\n" for @files;
+
+In the C<POD2-Base> distribution tarball, a script
+F<eg/list.pl> is included with an improved
+version of this code.
+
+The rules of finding POD in F<.pod>, F<.pm> files and others
+belong to L<Pod::Perldoc>. So C<POD2::Base> do not try
+to repeat them here.
+
+
 =head1 AUTHORS
 
 Enrico Sorcinelli E<lt>bepi at perl.itE<gt> (the original POD2::IT code)
@@ -196,13 +272,13 @@ Adriano Ferreira E<lt>ferreira at cpan.orgE<gt>
 
 =head1 SEE ALSO
 
-L<POD2::FR>, L<POD2::LT>, L<perldoc>, L<perl>.
+L<POD2::IT>, L<POD2::FR>, L<POD2::LT>, L<POD2::CN>, L<perldoc>, L<perl>.
 
 =head1 COPYRIGHT AND LICENCE
 
 Copyright (C) 2004-2006 Perl.it / Perl Mongers Italia
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself. 
+it under the same terms as Perl itself.
 
 =cut

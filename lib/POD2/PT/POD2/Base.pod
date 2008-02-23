@@ -1,0 +1,18 @@
+
+=encoding utf8
+
+=head1 NAME
+
+[pt] POD2::Base - Módulo básico para traduções de documentação Perl
+
+=head1 SYNOPSIS
+
+    use POD2::Base;
+    $pod2 = POD2::Base->new({ lang => 'EO' });
+
+    @dirs = $pod2->pod_dirs;
+    $re = $pod2->search_perlfunc_re;
+
+=head1 DESCRIPTION
+
+
