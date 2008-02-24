@@ -1,6 +1,11 @@
 
 Revision history for Perl extension POD2::Base.
 
+0.041   Sun Feb 24 2008
+        - POD2/PT/POD2/Base.pod is now a complete
+          Portuguese translation (without much review)
+          of POD2::Base docs
+
 0.04    Sat Feb 23 2008
         - File::Spec is a prereq now
         - one more constructor param: 'inc'

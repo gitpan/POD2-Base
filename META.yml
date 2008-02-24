@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                POD2-Base
-version:             0.04
+version:             0.041
 abstract:            Base module for translations of Perl documentation
 license:             perl
 author:              ~

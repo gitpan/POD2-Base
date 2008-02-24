@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 use vars qw( $VERSION );
-$VERSION = '0.04'; # XXX
+$VERSION = '0.041';
 
 use File::Spec ();
 
@@ -19,7 +19,6 @@ sub new {
 
 # instance variables:
 #   lang - the preferred language of the POD documents
-##   base_dir - the base directory where these PODs live
 #   inc - alternate library dirs (if given, replaces the ones in @INC)
 
 sub _init {
@@ -31,7 +30,6 @@ sub _init {
     #croak "???" unless $args{lang};
     my $lang = uc $args{lang};
     $self->{lang} = $lang;
-#    $self->{base_dir} = [ _base_dir($lang) ];
     $self->{inc} = $args{inc}; # XXX croak ?! must be array ref
 
     return $self;
@@ -46,15 +44,6 @@ sub _extract_lang {
          :                           undef
          ;
 }
-
-#sub _base_dir {
-#    my $lang = shift;
-#
-#    my $dir = $INC{'POD2/Base.pm'};
-#    $dir =~ s/Base\.pm\z//;
-#    $dir .= $lang . '/';
-#    return $dir;
-#}
 
 sub _lib_dirs {
     my $self = shift;
@@ -72,7 +61,6 @@ sub pod_dirs {
         return grep { -d } @candidates;
     }
     return @candidates;
-    #return @{ $self->{base_dir} };
 }
 
 #sub search_perlfunc_re {
