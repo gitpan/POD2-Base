@@ -1,7 +1,7 @@
 
 lib/POD2/Base.pm
 lib/POD2/Base.pod
-lib/POD2/PT/POD2/Base.pod      A hoax for a PT translation of POD2::Base docs
+lib/POD2/PT/POD2/Base.pod       A PT translation of POD2::Base docs
 
 Makefile.PL
 Changes

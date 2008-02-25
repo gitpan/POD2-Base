@@ -1,6 +1,10 @@
 
 Revision history for Perl extension POD2::Base.
 
+0.042   Mon Feb 25 2008
+        - tweak POD2/PT/POD2/Base.pod
+        - (temporarily) skips POD test for 5.6
+
 0.041   Sun Feb 24 2008
         - POD2/PT/POD2/Base.pod is now a complete
           Portuguese translation (without much review)

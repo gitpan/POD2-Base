@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 use vars qw( $VERSION );
-$VERSION = '0.041';
+$VERSION = '0.042';
 
 use File::Spec ();
 

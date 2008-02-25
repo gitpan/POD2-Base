@@ -3,7 +3,7 @@
 
 =head1 NAME/NOME
 
-POD2::Base [pt] - Módulo básico para traduções de documentação Perl
+POD2::Base~[pt] - Módulo básico para traduções de documentação Perl
 
 =head1 SINOPSE
 
@@ -283,6 +283,13 @@ Adriano Ferreira E<lt>ferreira at cpan.orgE<gt>
 
 L<POD2::IT>, L<POD2::FR>, L<POD2::LT>, L<POD2::CN>, L<perldoc>, L<perl>.
 
+(O propósito desta tradução é servir como um primeiro teste 
+para experimentar o suporte dos vários modules Pod e I<sites> Perl
+aos PODs traduzidos.)
+
+(This translation was supplied as a front test against the support
+of the many Pod modules and Perl sites on translated PODs.)
+
 =head1 COPYRIGHT E LICENÇA
 
 Copyright (C) 2004-2006 Perl.it / Perl Mongers Italia
@@ -297,9 +304,9 @@ it under the same terms as Perl itself.
 =begin meta
 
 --- 
-date: 2008-02-24T18:27:28
-md5: 3468f3be7174ce894f85804754407a9e
-revision: 2
+date: 2008-02-25T11:01:45
+md5: 47896a7d12987b2f18179eac7f52f8b2
+revision: 3
 translated_from: 
   history: []
 
