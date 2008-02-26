@@ -1,6 +1,9 @@
 
 Revision history for Perl extension POD2::Base.
 
+0.043   Tue Feb 26 2008
+        - removed 'our' in t/02_basic.t (for 5.005's sake)
+
 0.042   Mon Feb 25 2008
         - tweak POD2/PT/POD2/Base.pod
         - (temporarily) skips POD test for 5.6

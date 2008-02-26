@@ -25,12 +25,12 @@ __END__
 
 =head1 NAME
 
-list.pl - find all POD dirs for a language
+list.pl - find all files in POD dirs for a certain language
 
 =head1 USAGE
 
     list.pl lang
 
 where B<lang> is the apropriate language code 
-(eg. PT, IT, FR, etc.)
+(eg. CN, PT, IT, FR, etc.)
 

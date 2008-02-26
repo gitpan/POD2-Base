@@ -283,6 +283,8 @@ Adriano Ferreira E<lt>ferreira at cpan.orgE<gt>
 
 L<POD2::IT>, L<POD2::FR>, L<POD2::LT>, L<POD2::CN>, L<perldoc>, L<perl>.
 
+A versão original deste documento: L<POD2::Base>.
+
 (O propósito desta tradução é servir como um primeiro teste 
 para experimentar o suporte dos vários modules Pod e I<sites> Perl
 aos PODs traduzidos.)

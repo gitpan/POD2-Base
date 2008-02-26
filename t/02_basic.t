@@ -41,7 +41,7 @@ sub subsumes_dir {
 
 package POD2::TLH;
 
-our @ISA = qw( POD2::Base );
+@POD2::TLH::ISA = qw( POD2::Base );
 
 sub search_perlfunc_re {
     return 'Klingon Listing of Functions';
