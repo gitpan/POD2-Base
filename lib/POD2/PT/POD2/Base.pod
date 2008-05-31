@@ -3,7 +3,7 @@
 
 =head1 NAME/NOME
 
-POD2::Base~[pt] - Módulo básico para traduções de documentação Perl
+POD2::Base - Módulo básico para traduções de documentação Perl
 
 =head1 SINOPSE
 
@@ -306,14 +306,16 @@ it under the same terms as Perl itself.
 =begin meta
 
 --- 
-date: 2008-02-25T11:01:45
-md5: 47896a7d12987b2f18179eac7f52f8b2
-revision: 3
+date: 2008-05-31T21:04:32
+md5: 0086f42d813a37a7b54ef569e753f520
+revision: 5
 translated_from: 
-  history: []
-
-  md5: ~
-  uri: http://search.cpan.org/src/FERREIRA/POD2-Base-0.04/lib/POD2/Base.pod
+  history: 
+    - 
+      md5: 42cdafc83192d88442586f4456e7403e
+      uri: http://search.cpan.org/src/FERREIRA/POD2-Base-0.04/lib/POD2/Base.pod
+  md5: 950e47090ddbfef57f7071d887d7f7ca
+  uri: http://search.cpan.org/src/FERREIRA/POD2-Base-0.044_1/lib/POD2/Base.pod
 
 
 =end meta

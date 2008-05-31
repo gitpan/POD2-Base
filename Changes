@@ -1,6 +1,11 @@
 
 Revision history for Perl extension POD2::Base.
 
+0.044_1 Sat May 31 2008
+        - no code change
+        - experimenting search.cpan support for PODs
+          with same pod names
+
 0.043   Tue Feb 26 2008
         - removed 'our' in t/02_basic.t (for 5.005's sake)
 
